@@ -1,10 +1,11 @@
 package main
 
 import (
-	"Saitinai/app"
 	"log"
 	"net/http"
 	"os"
+
+	app "github.com/tommar5/Saitinai/app"
 
 	"github.com/gorilla/handlers"
 )

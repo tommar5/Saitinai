@@ -5,9 +5,12 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
+	c "github.com/tommar5/Saitinai/app/controllers"
+	r "github.com/tommar5/Saitinai/app/repositories"
 )
 
-var controller = &Controller{Repository: Repository{}}
+var Ucontroller = &c.UserController{UserRepo: r.UserRepo{}}
+var Vcontroller = &c.VaccineController{VaccineRepo: r.VaccineRepo{}}
 
 // Route defines a route
 type Route struct {
@@ -25,46 +28,46 @@ var routes = Routes{
 		"Authentication",
 		"POST",
 		"/get-token",
-		controller.GetToken,
+		Ucontroller.GetToken,
 	},
 	Route{
 		"Index",
 		"GET",
-		"/",
-		controller.Index,
+		"/user",
+		Ucontroller.Index,
 	},
 	Route{
-		"AddProduct",
+		"AddUser",
 		"POST",
-		"/AddProduct",
-		AuthenticationMiddleware(controller.AddProduct),
+		"/user/add",
+		c.AuthenticationMiddleware(Ucontroller.AddUser),
 	},
 	Route{
-		"UpdateProduct",
+		"UpdateUser",
 		"PUT",
-		"/UpdateProduct",
-		AuthenticationMiddleware(controller.UpdateProduct),
+		"/user/update",
+		c.AuthenticationMiddleware(Ucontroller.UpdateUser),
 	},
-	// Get Product by {id}
+	// Get User by {id}
 	Route{
-		"GetProduct",
+		"GetUser",
 		"GET",
-		"/products/{id}",
-		controller.GetProduct,
+		"/user/{id}",
+		Ucontroller.GetUser,
 	},
-	// Delete Product by {id}
+	// Delete User by {id}
 	Route{
-		"DeleteProduct",
+		"DeleteUser",
 		"DELETE",
-		"/deleteProduct/{id}",
-		AuthenticationMiddleware(controller.DeleteProduct),
+		"/user/{id}/delete",
+		c.AuthenticationMiddleware(Ucontroller.DeleteUser),
 	},
-	// Search product with string
+	// Search user with string
 	Route{
-		"SearchProduct",
+		"SearchUser",
 		"GET",
-		"/Search/{query}",
-		controller.SearchProduct,
+		"/user/search/{query}",
+		Ucontroller.SearchUser,
 	}}
 
 // NewRouter configures a new router to the API

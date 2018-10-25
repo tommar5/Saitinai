@@ -16,4 +16,12 @@ type User struct {
 	Role      int       `json:"role"`
 }
 
+type JwtToken struct {
+	Token string `json:"token"`
+}
+
+type Exception struct {
+	Message string `json:"message"`
+}
+
 type Users []User

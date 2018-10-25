@@ -59,7 +59,7 @@ func (r VaccineRepo) GetVaccineById(id int) vac.Vaccine {
 }
 
 // GetVaccinesByString takes a search string as input and returns vaccines
-func (r VaccineRepo) GetVacinesByString(query string) vac.Vaccines {
+func (r VaccineRepo) GetVaccinesByString(query string) vac.Vaccines {
 	session, err := mgo.Dial(db.SERVER)
 
 	if err != nil {
